@@ -1,0 +1,46 @@
+{#
+ # News entry template
+ # -------------------
+ #
+ # This template gets loaded whenever a News entry’s URL is
+ # requested. That’s because the News section’s Template setting is
+ # set to “news/_entry”, the path to this template.
+ #
+ # When this template is loaded, it will already have an ‘entry’
+ # variable, set to the requested News entry.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layouts/layout" %}
+{% set title = entry.title %}
+
+{% block content %}
+	<main role="main" class="container">
+		<section class="row">
+			<div class="col-sm-12">
+				<div class="projects">
+					<div class="project-intro">
+						<h1 class="project-title">{{ entry.title }}</h1>
+						<div class="project-desc">{{ entry.body }}</div>
+						<p>Agency: <a href="http://md.studentlife.uiowa.edu/">M + D</a> | Lead Developer: Dustin Quam</p>
+						{% if entry.roles | length %}
+							<ul class="project-meta">
+								<li>MY ROLES:</li>
+								{% for option in entry.roles %}
+									<li>{{ option.label }}</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+						{% if entry.linkUrl %}
+							<p class="text-center"><a href="{{ entry.linkUrl}}" target="_blank" class="btn btn-default">View site</a></p>
+						{% endif %}
+					</div>
+					<hr>
+					{% include "_includes/article_body" %}
+				</div>
+			</div>
+		</section>
+	</main>
+{% endblock %}

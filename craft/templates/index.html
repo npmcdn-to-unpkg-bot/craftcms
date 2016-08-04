@@ -1,0 +1,104 @@
+{#
+ # Homepage template
+ # ---------------
+ #
+ # When this template gets loaded, it will be because someone has accessed
+ # http://yoursite.com/ (without any URI). Craft checks to see if you have
+ # a Single section set to be the Homepage (as you do, by default), and
+ # loads the section’s Template (this file). A special ‘entry’ variable
+ # will already be set for you, assigned to the Homepage entry.
+ #
+ # It's worth noting that even if you didn't have a Homepage Single section,
+ # as long as this template remains at craft/templates/index.html, it
+ # would still be the one to get loaded when accessing http://yoursite.com/,
+ # albeit without an ‘entry’ variable already set for you.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layouts/layout" %}
+{% set bodyClass = "home" %}
+
+{% block header %}
+	<header role="banner" class="header">
+		<div class="hero">
+			<div class="logo"><img src="{{baseUrl}}assets/images/logo.gif" alt="brandon ewoldt logo"></div>
+			<h1>Hi, I'm Brandon Ewoldt</h1>
+			<h2>A Web Designer, in Iowa City, IA</h2>
+			<div class="links">
+				<h3 class="findme">Find Me:</h3>
+				<ul class="unstyled">
+					<li>
+						<a href="mailto:bewoldt1@gmail.com"><svg class="icon icon-envelop"><use xlink:href="#icon-envelop"></use></svg></a>
+					</li>
+					<li><a href="https://www.linkedin.com/in/brandonewoldt"><svg class="icon icon-linkedin"><use xlink:href="#icon-linkedin"></use></svg></a></li>
+					<li>
+						<a href="https://github.com/bewoldt"><svg class="icon icon-github"><use xlink:href="#icon-github"></use></svg></a>
+					</li>
+
+					<!-- <li>
+						<a href="#"><svg class="icon icon-facebook"><use xlink:href="#icon-facebook"></use></svg></a>
+					</li> -->
+					<!-- <li>
+						<a href="#"><svg class="icon icon-twitter"><use xlink:href="#icon-twitter"></use></svg></a>
+					</li> -->
+					<li>
+						<a href="https://www.instagram.com/bewoldt/">
+							<svg class="icon icon-instagram"><use xlink:href="#icon-instagram"></use></svg>
+						</a>
+					</li>
+					<li>
+						<a href="https://dribbble.com/brandone">
+							<svg class="icon icon-dribbble"><use xlink:href="#icon-dribbble"></use></svg>
+						</a>
+					</li>
+					<li>
+						<a href="https://codepen.io/bewoldt/">
+							<svg class="icon icon-codepen"><use xlink:href="#icon-codepen"></use></svg>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</header>
+{% endblock %}
+
+{% block content %}
+	<main role="main" class="container">
+		<section class="portfolio">
+			<h2 class="text-center recentwork">Recent Work</h2>
+			<ul class="unstyled justify justify-3">
+				{# Pull in the three latest Work entries #}
+				{% for workEntry in craft.entries.section('work').limit(6) %}
+					<li class="justify-item">
+						<div class="work">
+							{% set image = workEntry.featuredThumb.first() %}
+							{% if image %}
+								<a class="work-img" href="{{ workEntry.url }}">
+									<img src="{{ image.getUrl('thumb') }}" alt="{{ workEntry.title }}"/>
+								</a>
+							{% endif %}
+							<h3 class="work-title"><a href="{{ workEntry.url }}">{{ workEntry.title }}</a></h3>
+							<p class="work-desc">{{ workEntry.shortDescription }}</p>
+						</div>
+					</li>
+				{% endfor %}
+				<li class="justify-item filler"></li>
+			</ul>
+		</section>
+
+		<!-- <section>
+			<h2>Recent Notes</h2>
+			<ul>
+				{% for entry in craft.entries.section('notes').limit(5).find() %}
+					<li>
+						<p><a href="{{ entry.url }}">{{ entry.title }}</a></p>
+						<p class="notes-meta">Posted on {{ entry.postDate.format('F d, Y') }}</p>
+					</li>
+				{% endfor %}
+			</ul>
+		</section> -->
+	</main>
+
+{% endblock %}

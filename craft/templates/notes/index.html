@@ -1,0 +1,43 @@
+{#
+ # Notes index template
+ # -------------------
+ #
+ # This template is loaded whenever http://example.com/notes is
+ # requested, because it is located at notes/index.html in your
+ # craft/templates/ folder.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layouts/layout" %}
+{% set title = "Notes" %}
+{% set bodyClass = "notes" %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<h1 class="text-center">Notes</h1>
+			<div class="notes-list">
+
+
+				{% paginate craft.entries.section('notes').limit(6) as pageInfo, pageEntries %}
+
+				{% for entry in pageEntries %}
+					<article>
+						<h2 class="notes-title"><a href="{{ entry.url }}">{{ entry.title }}</a></h2>
+						<p class="notes-meta"><em>Posted on {{ entry.postDate.format('F d, Y') }}</em></p>
+						{{ entry.body.getPage(1) }}
+						{% include "_includes/article_body" %}
+						</a>
+					</article>
+				{% endfor %}
+
+				{% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
+				{% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
