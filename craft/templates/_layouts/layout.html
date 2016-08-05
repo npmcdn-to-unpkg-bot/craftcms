@@ -1,0 +1,53 @@
+{#
+ # Layout template
+ # ---------------
+ #
+ # This template defines your site’s global layout. It can be
+ # “extended” by other templates to fill in the gaps.
+ #
+ # See Twig’s Template Inheritance documentation for more details:
+ # http://twig.sensiolabs.org/doc/templates.html#template-inheritance
+ #}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>
+		{% if entry.metaTitle %}
+			{{ entry.metaTitle }}
+			{% else %}
+			{{ title }} | {{ siteName }}
+		{% endif %}
+	</title>
+	{% if entry.metaDescription %}<meta name="description" content="{{ entry.metaDescription }}">{% endif %}
+	<link rel="home" href="{{ siteUrl }}" />
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,300' rel='stylesheet' type='text/css'>
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/master.css">
+	{% include "_includes/favicon" %}
+</head>
+
+<body {% if bodyClass is defined %}class="{{ bodyClass }}"{% endif %}>
+	{% include "_includes/svg" %}
+	{% include "_includes/analytics" %}
+	<header id="header">
+		{% block header %}
+			<div class="logo"><a href="{{ siteUrl }}"><img src="{{baseUrl}}/assets/images/logo.gif" alt="brandon ewoldt logo"></a></div>
+		{% endblock %}
+	</header>
+	<main id="content" role="main">
+		{% block content %}
+			<p>If you see me, you haven’t set your <code>{% verbatim %}{% block content %}…{% endblock %}{% endverbatim %}</code> yet.</p>
+			<p>See Twig’s <a href="http://twig.sensiolabs.org/doc/templates.html#template-inheritance">Template Inheritance</a> documentation for an explanation.</p>
+		{% endblock %}
+	</main>
+	<footer id="footer">
+		<p><a href="{{ siteUrl }}">Home</a> | <a href="{{ siteUrl }}notes/">Notes</a> | <a href="{{ siteUrl }}photos/">Photos</a></p>
+		<p>{{ footerContent.copyright|replace('{year}', now|date('Y')) }}</p>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,87 @@
+{#
+ # News entry template
+ # -------------------
+ #
+ # This template gets loaded whenever a News entry’s URL is
+ # requested. That’s because the News section’s Template setting is
+ # set to “news/_entry”, the path to this template.
+ #
+ # When this template is loaded, it will already have an ‘entry’
+ # variable, set to the requested News entry.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% set title = entry.title %}
+{% set bodyClass = "work" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>
+		{% if entry.metaTitle %}
+			{{ entry.metaTitle }}
+			{% else %}
+			{{ title }} | {{ siteName }}
+		{% endif %}
+	</title>
+	{% if entry.metaDescription %}<meta name="description" content="{{ entry.metaDescription }}">{% endif %}
+	<link rel="home" href="{{ siteUrl }}" />
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,300' rel='stylesheet' type='text/css'>
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/master.css">
+	{% include "_includes/favicon" %}
+</head>
+
+<body {% if bodyClass is defined %}class="{{ bodyClass }}"{% endif %}>
+	{% include "_includes/svg" %}
+	{% include "_includes/analytics" %}
+	<div class="stage" {% if entry.backgroundColor and entry.backgroundColor != '#000000' %}style="background-color: {{ entry.backgroundColor }}"{% endif %}>
+		<div class="container">
+			<header class="header">
+			
+				<div class="logo"><a href="{{ siteUrl }}"><img src="{{baseUrl}}/assets/images/logo.gif" alt="brandon ewoldt logo"></a></div>
+			</header>
+			<div class="banner-graphic">
+				{% set asset = entry.featuredImage.first() %}
+				<img src="{{ asset.url }}" alt="">
+			</div>
+		</div>
+	</div>
+	<main id="content" role="main" class="container">
+		<section class="row">
+			<div class="col-sm-12">
+				<div class="projects">
+					<div class="project-intro">
+						<h1 class="project-title">{{ entry.title }}</h1>
+						<div class="project-desc">{{ entry.body }}</div>
+						<p>Agency: <a href="http://md.studentlife.uiowa.edu/">M + D</a> | Lead Developer: Dustin Quam</p>
+						{% if entry.roles | length %}
+							<ul class="project-meta">
+								<li>MY ROLES:</li>
+								{% for option in entry.roles %}
+									<li>{{ option.label }}</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+						{% if entry.linkUrl %}
+							<p class="text-center"><a href="{{ entry.linkUrl}}" target="_blank" class="btn btn-default">View site</a></p>
+						{% endif %}
+					</div>
+					<hr>
+					{% include "_includes/article_body" %}
+				</div>
+			</div>
+		</section>
+	</main>
+	<footer id="footer">
+		<p><a href="{{ siteUrl }}">Home</a> | <a href="{{ siteUrl }}notes/">Notes</a> | <a href="{{ siteUrl }}photos/">Photos</a></p>
+		<p>{{ footerContent.copyright|replace('{year}', now|date('Y')) }}</p>
+	</footer>
+</body>
+</html>
