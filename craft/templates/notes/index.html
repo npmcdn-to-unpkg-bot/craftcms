@@ -29,6 +29,7 @@
 						<h2 class="notes-title"><a href="{{ entry.url }}">{{ entry.title }}</a></h2>
 						<p class="notes-meta"><em>Posted on {{ entry.postDate.format('F d, Y') }}</em></p>
 						{{ entry.body.getPage(1) }}
+						{% include "_includes/article_body" %}
 						</a>
 					</article>
 				{% endfor %}

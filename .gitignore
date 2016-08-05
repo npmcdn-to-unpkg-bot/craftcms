@@ -1,0 +1,25 @@
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.DS_Store
+
+pids
+logs
+results
+
+npm-debug.log
+node_modules
+
+.sass-cache
+
+# Craft runtime and backups folders
+# ----------------------------------------------------------------------
+/craft/app/
+/craft/config/db.php
+/craft/config/general.php
+/craft/storage/
