@@ -41,15 +41,14 @@
 <body {% if bodyClass is defined %}class="{{ bodyClass }}"{% endif %}>
 	{% include "_includes/svg" %}
 	{% include "_includes/analytics" %}
-	<div class="stage" {% if entry.backgroundColor and entry.backgroundColor != '#000000' %}style="background-color: {{ entry.backgroundColor }}"{% endif %}>
+	<div class="stage" {% if entry.backgroundColor %}style="background-color: #{{ entry.backgroundColor }}"{% endif %}>
 		<div class="container">
 			<header class="header">
-			
 				<div class="logo"><a href="{{ siteUrl }}"><img src="{{baseUrl}}/assets/images/logo.gif" alt="brandon ewoldt logo"></a></div>
 			</header>
-			<div class="banner-graphic">
+			<div class="featured-image">
 				{% set asset = entry.featuredImage.first() %}
-				<img src="{{ asset.url }}" alt="">
+				<img src="{{ siteUrl }}{{ asset.url }}" alt="{{ entry.title }}">
 			</div>
 		</div>
 	</div>

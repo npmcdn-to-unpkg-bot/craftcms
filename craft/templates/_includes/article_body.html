@@ -46,7 +46,7 @@
 	{% if position == 'full' %}
 		<div class="flex flex-full">
 	{% elseif closedLastRow %}
-		<div class="flex">
+		<div class="flex clearfix">
 		{% if type not in ['gallery', 'quote'] %}
 			<div class="g1-flex4 g2-flex6
 			{%- if (type == 'image' and position == 'center') %} g3-flex8 g3-offset2
@@ -93,11 +93,10 @@
 				{% endif %}
 				#}
 
-				<p><img{% if position == 'full' %} class="contain-media"{% endif %} src="{{ image.url }}" alt="{{ image.title }}"></p>
+				<p><img{% if position == 'full' %} class="contain-media"{% endif %} src="{{ siteUrl }}{{ image.url }}" alt="{{ image.title }}"></p>
 				{% if block.caption %}
                     <p class="caption">{{ block.caption }}</p>
                 {% endif %}
-                <hr>
 			{# {% endif %} #}
 
 		{% case 'gallery' %}
@@ -143,7 +142,7 @@
 		{% if position != 'full' and type not in ['gallery', 'quote'] %}
 			</div>
 		{% endif %}
-		</div>
+		</div><hr>
 		{% set closedLastRow = true %}
 	{% else %}
 		{% set closedLastRow = false %}

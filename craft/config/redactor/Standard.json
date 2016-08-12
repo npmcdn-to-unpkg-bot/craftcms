@@ -1,4 +1,6 @@
 {
 	"buttons": ["format","bold","italic","lists","link","file","horizontalrule"],
-	"plugins": ["source","fullscreen"]
+	"plugins": ["source","fullscreen"],
+	"linkSize": 100,
+	"minHeight": 150
 }
