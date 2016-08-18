@@ -357,7 +357,14 @@ footer p {
 		margin: 0 auto;
 	}
 }
-
+.projects .flex {
+	border-bottom: 1px solid #ddd;
+	padding: 2em 0;
+}
+.gallery {
+	padding: 4em 0;
+	background-color: #f4f4f4;
+}
 .gallery-text {
 	width: 60%;
 	text-align: center;
