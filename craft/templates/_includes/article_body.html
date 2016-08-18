@@ -95,17 +95,23 @@
 
 				<p><img{% if position == 'full' %} class="contain-media"{% endif %} src="{{ siteUrl }}{{ image.url }}" alt="{{ image.title }}"></p>
 				{% if block.caption %}
-                    <p class="caption">{{ block.caption }}</p>
-                {% endif %}
+               <p class="caption">{{ block.caption }}</p>
+            {% endif %}
 			{# {% endif %} #}
 
 		{% case 'gallery' %}
+			{% if block.text %}
+				<div class="gallery-text">
+					{{ block.text }}
+				</div>
+			{% endif %}
+			<div class="carousel" data-flickity>
 			{% for image in block.images %}
-				<div class="g1-flex4 g2-flex2 g3-flex4">
-					<img src="{{ image.getUrl('small') }}" alt="{{ image.title }}">
-					{{ image.shortDescription }}
+				<div class="carousel-cell">
+					<img src="{{ siteUrl }}{{ image.getUrl }}" alt="{{ image.title }}">
 				</div>
 			{% endfor %}
+			</div>
 
 		{% case 'quote' %}
 

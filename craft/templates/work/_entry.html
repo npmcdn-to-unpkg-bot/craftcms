@@ -34,7 +34,8 @@
 	<!-- Google Fonts -->
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,300' rel='stylesheet' type='text/css'>
 	<!-- CSS -->
-	<link rel="stylesheet" href="/assets/css/master.css">
+	<link rel="stylesheet" href="https://npmcdn.com/flickity@2.0/dist/flickity.css" media="screen">
+	<link rel="stylesheet" href="{{ siteUrl }}/assets/css/master.css">
 	{% include "_includes/favicon" %}
 </head>
 
@@ -82,5 +83,7 @@
 		<p><a href="{{ siteUrl }}">Home</a> | <a href="{{ siteUrl }}notes/">Notes</a> | <a href="{{ siteUrl }}photos/">Photos</a></p>
 		<p>{{ footerContent.copyright|replace('{year}', now|date('Y')) }}</p>
 	</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="{{ siteurl }}/assets/js/build/production.min.js"></script>
 </body>
 </html>

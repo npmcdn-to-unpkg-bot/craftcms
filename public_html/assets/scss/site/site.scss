@@ -348,3 +348,18 @@ footer p {
     padding-left: 20px;
     padding-left: 1.25rem;
 }
+.carousel-cell {
+	width: 66%;
+	max-height: 600px;
+	margin-right: 10px;
+	& img {
+		display: block;
+		margin: 0 auto;
+	}
+}
+
+.gallery-text {
+	width: 60%;
+	text-align: center;
+	margin: 0 auto 4em auto;
+}
